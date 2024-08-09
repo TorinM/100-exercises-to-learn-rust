@@ -8,7 +8,25 @@ struct Ticket {
 
 // TODO: Implement the `PartialEq` trait for `Ticket`.
 
-impl PartialEq for Ticket {}
+impl PartialEq for Ticket {
+    fn eq(&self, _other: &Self) -> bool {
+        if self.title != _other.title {
+            return false;
+        }
+        if self.description != _other.description {
+            return false;
+        }
+        if self.status != _other.status {
+            return false;
+        }
+        return true
+    }
+
+    fn ne(&self, _other: &Self) -> bool {
+        !self.eq(_other)
+    }
+
+}
 
 #[cfg(test)]
 mod tests {
