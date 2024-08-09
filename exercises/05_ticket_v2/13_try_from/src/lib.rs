@@ -7,6 +7,31 @@ enum Status {
     InProgress,
     Done,
 }
+impl TryFrom<String> for Status {
+    type Error = String;
+
+    fn try_from(value: String) -> Result<Status, String> {
+        match value.as_str() {
+            "ToDO" => Ok(Status::ToDo),
+            "inproGress" => Ok(Status::InProgress),
+            "Done" => Ok(Status::Done),
+            _ => Err("Bad Value type".to_string())
+        }
+    }
+}
+impl TryFrom<&str> for Status {
+    type Error = String;
+
+    fn try_from(value: &str) -> Result<Status, String> {
+        match value {
+            "todo" => Ok(Status::ToDo),
+            "inprogress" => Ok(Status::InProgress),
+            "done" => Ok(Status::Done),
+            _ => Err("Bad Value type".to_string())
+        }
+    }
+
+}
 
 #[cfg(test)]
 mod tests {
