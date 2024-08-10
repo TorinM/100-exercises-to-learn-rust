@@ -7,6 +7,21 @@ pub struct TicketStore {
     tickets: Vec<Ticket>,
     counter: u64,
 }
+impl std::ops::Index<TicketId> for TicketStore {
+    type Output = Ticket;
+
+    fn index(&self, idx: TicketId) -> &Self::Output {
+        self.tickets.iter().find(|&t| t.id == idx).unwrap()
+    }
+}
+impl std::ops::Index<&TicketId> for TicketStore {
+    type Output = Ticket;
+
+    fn index(&self, idx: &TicketId) -> &Self::Output {
+        &self[*idx] // uses the above impl of Index<TicketId>
+    }
+}
+
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct TicketId(u64);
